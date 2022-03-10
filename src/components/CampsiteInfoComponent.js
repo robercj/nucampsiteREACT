@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class CampsiteInfo extends Component {
 
@@ -7,10 +7,10 @@ class CampsiteInfo extends Component {
         return (
             <div className='col-md-5 m-1'>
                 <Card>
-                    <CardImg top src={this.props.campsite.image} alt={this.props.campsite.name} />
+                    <CardImg top src={campsite.image} alt={campsite.name} />
                     <CardBody>
-                        <CardTitle>{this.props.campsite.name}</CardTitle>
-                        <CardText>{this.props.campsite.description}</CardText>
+                        <CardTitle>{campsite.name}</CardTitle>
+                        <CardText>{campsite.description}</CardText>
                     </CardBody>
                 </Card>
             </div>
@@ -22,21 +22,26 @@ class CampsiteInfo extends Component {
             return (
                 <div className='col-md-5 md-1'>
                     <h4>COMMENTS</h4>
-                    {this.props.comments.map( () => {}
-                    )}
+                    {comments.map(comment => (<>{comment.text} < br /> {comment.author} {comment.date}</>))}
                 </div>
             )
         }
-        <h1>failed</h1>
     }
 
     render() {
         if (this.props.campsite) {
-            return (this.renderCampsite())
-        }
+            return (
+                <div className='container'> 
+                    <div className='row'>
+                        {this.renderCampsite(this.props.campsite)}
+                        {this.renderComments(this.props.campsite.comments)}
+                    </div>
+                </div>
+                    )
+            }
         else {
-            return <div/>
-        }
+            return <div />
+            }
     }
 }
 export default CampsiteInfo;
