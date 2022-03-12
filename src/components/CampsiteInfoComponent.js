@@ -21,7 +21,9 @@ function RenderComments({ comments }) {
         return (
             <div className='col-md-5 md-1'>
                 <h4>COMMENTS</h4>
-                {comments.map(comment => (<>{comment.text} < br /> {comment.author} {comment.date}</>))}
+                {comments.map(comment => (<>{comment.text} < br />
+                    {comment.author} {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}</>))}
+                
             </div>
         )
     }
@@ -33,7 +35,7 @@ function CampsiteInfo(props){
             <div className='container'> 
                 <div className='row'>
                     <RenderCampsite campsite={props.campsite}/>
-                    <RenderComments comments={props.campsite.comments} />
+                    <RenderComments comments={props.comments} />
                 </div>
             </div>
                 )
