@@ -143,12 +143,8 @@ export const addCampsites = campsites => ({
     payload: campsites
 });
 
-export const addComment = (campsiteId, rating, author, text) => ({
+
+export const addComment = comment => ({
     type: ActionTypes.ADD_COMMENT,
-    payload: {
-        campsiteId: campsiteId,
-        rating: rating,
-        author: author,
-        text: text
-    }
+    payload: comment
 });
