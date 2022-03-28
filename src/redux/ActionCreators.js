@@ -148,3 +148,60 @@ export const addComment = comment => ({
     type: ActionTypes.ADD_COMMENT,
     payload: comment
 });
+
+export const fetchPartners = () => dispatch => {
+    dispatch(partnersLoading());
+
+    return fetch(baseUrl + 'partners')
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                const errMess = new Error(error.message);
+                throw errMess;
+            }
+        )
+        .then(response => response.json())
+        .then(partners => dispatch(addPartners(partners)))
+        .catch(error => dispatch(partnersFailed(error.message)));
+};
+
+export const addPartners = partners => ({
+    type: ActionTypes.ADD_PARTNERS,
+    payload: partners
+});
+export const partnersLoading = () => ({
+    type: ActionTypes.PARTNERS_LOADING,
+});
+
+export const partnersFailed = errMess => ({
+    type: ActionTypes.PARTNERS_FAILED,
+    payload: errMess
+});
+
+export const postFeedback = (feedback) => dispatch => {
+
+    return fetch(baseUrl)
+        .then(response => {
+            if (response.ok) {
+                return alert("Thank you for your Feedback" + <hr/> + feedback);
+            } else {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                const errMess = new Error(error.message);
+                throw errMess;
+            }
+        )
+        .then(response => response.json())
+        .then(feedback => dispatch(postFeedback(feedback)))
+}
