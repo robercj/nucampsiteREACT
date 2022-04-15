@@ -1,3 +1,12 @@
+# NuCamp Site - React
+
+Converted and enriched the original bootstrap4 website included in my portfolio using React.
+
+It is set up to utilize a local json database for the assets and is capable of sending information and updating the database (such as the comment sections for the individual campsites)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
